@@ -10,7 +10,6 @@
  */
 class Solution {
 public:
-    
     int length(ListNode* head){
         int length = 0;
         while(head != nullptr){
