@@ -1,11 +1,11 @@
 class Solution {
 private:
-    bool is_overlapping(vector<int>& arr1, vector<int>& arr2){
+    bool is_overlapping(const vector<int>& arr1, const vector<int>& arr2){
         // O(1)
-        return (arr2[0] >= arr1[0] && arr2[0] <= arr1[1]) || (arr2[1] >= arr1[0] && arr2[1] <= arr1[1]) || (arr1[0] >= arr2[0] && arr1[0] <= arr2[1]) || (arr1[1] >= arr2[0] && arr1[1] <= arr2[1]);
+        return (arr2[0] >= arr1[0] && arr2[0] <= arr1[1]) || (arr2[1] >= arr1[0] && arr2[1] <= arr1[1]);
     }
 
-    vector<int> merge_two_overlapping_arrays(vector<int>& arr1, vector<int>& arr2){
+    vector<int> merge_two_overlapping_arrays(const vector<int>& arr1, const vector<int>& arr2){
         // O(1) --> since both arrays will always be of size 2
         vector<int> merged_array;
         int first_element = min(arr1[0], arr2[0]);
