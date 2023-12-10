@@ -2,11 +2,7 @@ class Solution {
 private:
     bool is_overlapping(vector<int>& arr1, vector<int>& arr2){
         // O(1)
-        int x1 = arr1[0];
-        int x2 = arr1[1];
-        int y1 = arr2[0];
-        int y2 = arr2[1];
-        return (y1 >= x1 && y1 <= x2) || (y2 >= x1 && y2 <= x2) || (x1 >= y1 && x1 <= y2) || (x2 >= y1 && x2 <= y2);
+        return (arr2[0] >= arr1[0] && arr2[0] <= arr1[1]) || (arr2[1] >= arr1[0] && arr2[1] <= arr1[1]) || (arr1[0] >= arr2[0] && arr1[0] <= arr2[1]) || (arr1[1] >= arr2[0] && arr1[1] <= arr2[1]);
     }
 
     vector<int> merge_two_overlapping_arrays(vector<int>& arr1, vector<int>& arr2){
@@ -30,19 +26,14 @@ public:
         int i = 1;
         vector<int> helper = intervals[0];
         while (i < size){
-            if (!(is_overlapping(helper, intervals[i]))){
-                merged_intervals.push_back(helper);
-                helper = intervals[i];
-                if (i == size - 1){
-                    merged_intervals.push_back(intervals[i]);
-                }
+            if (is_overlapping(helper, intervals[i])){
+               helper = merge_two_overlapping_arrays(helper, intervals[i]);
             }
             else{
-                helper = merge_two_overlapping_arrays(helper, intervals[i]);
-                if (i == size - 1){
-                    merged_intervals.push_back(helper);
-                }
+                merged_intervals.push_back(helper);
+                helper = intervals[i];
             }
+            if (i == size - 1) merged_intervals.push_back(helper);
             i++;
         }
         return merged_intervals;
