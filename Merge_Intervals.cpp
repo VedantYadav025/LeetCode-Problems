@@ -6,10 +6,7 @@ private:
         int x2 = arr1[1];
         int y1 = arr2[0];
         int y2 = arr2[1];
-        if ((y1 >= x1 && y1 <= x2) || (y2 >= x1 && y2 <= x2) || (x1 >= y1 && x1 <= y2) || (x2 >= y1 && x2 <= y2))
-            return true;
-        else
-            return false;
+        return (y1 >= x1 && y1 <= x2) || (y2 >= x1 && y2 <= x2) || (x1 >= y1 && x1 <= y2) || (x2 >= y1 && x2 <= y2);
     }
 
     vector<int> merge_two_overlapping_arrays(vector<int>& arr1, vector<int>& arr2){
@@ -30,19 +27,19 @@ public:
         if (size == 1){
             return intervals;
         }
-        int i = 0;
+        int i = 1;
         vector<int> helper = intervals[0];
-        while (i < size - 1){
-            if (!(is_overlapping(helper, intervals[i + 1]))){
+        while (i < size){
+            if (!(is_overlapping(helper, intervals[i]))){
                 merged_intervals.push_back(helper);
-                helper = intervals[i + 1];
-                if (i + 1 == size - 1){
-                    merged_intervals.push_back(intervals[i + 1]);
+                helper = intervals[i];
+                if (i == size - 1){
+                    merged_intervals.push_back(intervals[i]);
                 }
             }
             else{
-                helper = merge_two_overlapping_arrays(helper, intervals[i + 1]);
-                if (i + 1 == size - 1){
+                helper = merge_two_overlapping_arrays(helper, intervals[i]);
+                if (i == size - 1){
                     merged_intervals.push_back(helper);
                 }
             }
